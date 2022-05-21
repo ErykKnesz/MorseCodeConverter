@@ -60,6 +60,8 @@ morse_code = {
 
 morse_code_tool = MorseCodeTool(dit=DIT, dah=DAH, dit_len=DIT_LEN,
                                 dah_len=DAH_LEN, morse_code=morse_code)
-encoded_text = morse_code_tool.convert_to_morse('Daga Knesz')
+
+text_to_encode = input("Enter the text you want to encode: ")
+encoded_text = morse_code_tool.convert_to_morse(text_to_encode)
 
 morse_code_tool.play_morse_code(encoded_text)
