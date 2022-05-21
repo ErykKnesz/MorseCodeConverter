@@ -1,6 +1,6 @@
-import time
 import librosa
-from playsound import playsound
+
+from morse_code_tool import MorseCodeTool
 
 DIT = 'sounds/dit.wav'
 DAH = 'sounds/dah.wav'
@@ -58,55 +58,8 @@ morse_code = {
 }
 
 
-def convert_to_morse(text):
-    """Convert text input to morse code.
+morse_code_tool = MorseCodeTool(dit=DIT, dah=DAH, dit_len=DIT_LEN,
+                                dah_len=DAH_LEN, morse_code=morse_code)
+encoded_text = morse_code_tool.convert_to_morse('Daga Knesz')
 
-    Accept only English alphabet letters and Arabic numerals.
-
-    Parameters
-    ----------
-    text : str
-
-    Raises
-    ----------
-    ValueError
-        if character is not within the morse_code dict variable (no English
-        letter, Arabic numeral, punctuation mark or space.
-
-    Return a string.
-    """
-    morse_output = ""
-    for char in text.lower():
-        for k in morse_code:
-            if char == k:
-                morse_output += (morse_code[k] + " ")
-                break
-            else:
-                if k == ' ':
-                    raise ValueError(
-                        "Only English alphabet letters, arabic numerals, "
-                        "punctuation marks and spaces are allowed."
-                        f"Input character: {char}"
-                    )
-
-    return morse_output
-
-
-def play_morse_code(encoded_text):
-    """Convert encoded text to sound
-
-    Parameters:
-    encoded_text : str
-    """
-    for char in encoded_text:
-        if char == '.':
-            playsound(DIT)
-        elif char == '-':
-            playsound(DAH)
-        elif char == ' ':
-            time.sleep(DIT_LEN)
-        else:
-            time.sleep(DIT_LEN * 3)
-
-
-encoded_text = convert_to_morse('Daga Knesz')
+morse_code_tool.play_morse_code(encoded_text)
