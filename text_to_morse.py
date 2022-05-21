@@ -30,9 +30,19 @@ morse_code = {
 
 def convert_to_morse(text):
     morse_output = ""
-    for char in text:
+    for char in text.lower():
         for k in morse_code:
             if char == k:
                 morse_output += morse_code[k]
+                break
+            else:
+                if k == 'z':
+                    raise ValueError(
+                        "Only English alphabet letters are allowed. "
+                        f"Input character: {char}"
+                    )
+
     return morse_output
+
+
 
